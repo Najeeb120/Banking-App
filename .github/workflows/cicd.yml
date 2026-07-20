@@ -28,13 +28,13 @@ jobs:
         continue-on-error: true 
       
 
+      - name: Install Snyk 
+        uses: snyk/actions/setup@v1
+
       - name: Run Snyk Dependency Scan
-        uses: snyk/actions/maven@master
+        run: snyk test --severity-threshold=high --skip-unresolved=true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: test
-          args: --severity-threshold=high --skip-unresolved=true
 
       - name: Maven build
         run: mvn clean package -DskipTests
