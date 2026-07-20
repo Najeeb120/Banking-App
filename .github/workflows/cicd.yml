@@ -27,12 +27,19 @@ jobs:
         run: mvn checkstyle:check
         continue-on-error: true 
 
-      - name: Snyk Dependency scan
-        uses: snyk/actions@master
+      - name: Snyk setup
+        uses: snyk/actions/setup@master
+      
+
+      - name: Snyk dependency scan
+        run: synk test --severity-threshold=high --file=pom.xml
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high --file=pom.xml
+
+      - name: Maven build
+        run: mvn clean package -DskipTests
+
+
 
     
      
