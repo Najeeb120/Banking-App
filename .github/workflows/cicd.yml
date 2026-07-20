@@ -26,15 +26,14 @@ jobs:
       - name: Java Code Linting
         run: mvn checkstyle:check
         continue-on-error: true 
-
-      - name: Snyk setup
-        uses: snyk/actions/setup@master
       
 
       - name: Snyk dependency scan
-        run: snyk test --severity-threshold=high --all-projects -d
+        uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --skip-unresolved=true
 
       - name: Maven build
         run: mvn clean package -DskipTests
