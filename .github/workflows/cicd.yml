@@ -26,6 +26,9 @@ jobs:
       - name: Java Code Linting
         run: mvn checkstyle:check
         continue-on-error: true 
+
+      - name: Caching Maven Dependencies Locally
+        run: mvn dependency:tree -B
       
 
       - name: Trivy Software composition analysis
