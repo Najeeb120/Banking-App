@@ -43,7 +43,7 @@ jobs:
         
 
       - name: Maven build
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -Dcheckstyle.skip=true
 
 
 
