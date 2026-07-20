@@ -26,8 +26,8 @@ jobs:
       - name: Java Code Linting
         run: mvn checkstyle:check
 
-      - name: Synk Dependency scan
-        uses: synk/actions/maven@master
+      - name: Snyk Dependency scan
+        uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
