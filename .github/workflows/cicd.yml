@@ -28,13 +28,16 @@ jobs:
         continue-on-error: true 
       
 
-      - name: Install Snyk 
-        uses: snyk/actions/setup@v1
-
-      - name: Run Snyk Dependency Scan
-        run: snyk test --severity-threshold=high --skip-unresolved=true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Trivy Software composition analysis
+        uses: aquasecurity/trivy-action@master
+        with: 
+          scan-type: 'fs'        
+          scan-ref: '.'
+          format: 'table'
+          exit-code: '1'         
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+        
 
       - name: Maven build
         run: mvn clean package -DskipTests
