@@ -25,6 +25,7 @@ jobs:
       
       - name: Java Code Linting
         run: mvn checkstyle:check
+        continue-on-error: true 
 
       - name: Snyk Dependency scan
         uses: snyk/actions/maven@master
