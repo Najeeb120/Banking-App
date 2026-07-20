@@ -28,12 +28,12 @@ jobs:
         continue-on-error: true 
       
 
-      - name: Snyk dependency scan
+      - name: Run Snyk Dependency Scan
         uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          JAVA_HOME: ""
         with:
+          command: test
           args: --severity-threshold=high --skip-unresolved=true
 
       - name: Maven build
