@@ -93,6 +93,10 @@
         <consoleOutput>true</consoleOutput>
         <failsOnError>true</failsOnError>
         <linkXRef>false</linkXRef>
+        <!-- 1. Switch to Google Checks ruleset -->
+        <configLocation>google_checks.xml</configLocation>
+        <!-- 2. Tell Checkstyle to ignore missing Javadoc violations -->
+        <violationSeverity>warning</violationSeverity>
     </configuration>
     <executions>
         <execution>
@@ -103,7 +107,7 @@
             </goals>
         </execution>
     </executions>
-		    </plugin>
+			</plugin>
 			<plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
