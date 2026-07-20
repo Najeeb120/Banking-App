@@ -1,13 +1,18 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
     
+RUN apt-get update && apt-get install -y maven
+
+WORKDIR /app
+
+
+COPY pom.xml .
+
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+RUN cp target/*.jar  app.jar
+
 EXPOSE 8080
 
-RUN ls 
-
-ENV APP_HOME /usr/src/app
-
-COPY app/*.jar $APP_HOME/app.jar
-
-WORKDIR $APP_HOME
-
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"] 
